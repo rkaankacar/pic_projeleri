@@ -1,0 +1,29 @@
+#include <main.h>
+int sayac=0;
+#INT_TIMER0
+void TIMER0_isr(void)
+{ set_timer0(100);
+  sayac++;
+ if(sayac==100) {
+    output_b(0xff);
+    delay_ms(500);
+     output_b(0x00);
+    delay_ms(500);
+    sayac=0;
+ }
+}
+void main()
+{  set_tris_b(0x00);
+   setup_timer_0(RTCC_INTERNAL|RTCC_DIV_64|RTCC_8_BIT);      //1,6 ms overflow
+   set_timer0(100);
+   enable_interrupts(INT_TIMER0);
+   enable_interrupts(GLOBAl);
+
+   while(TRUE)
+   {
+
+
+      //TODO: User Code
+   }
+
+}
